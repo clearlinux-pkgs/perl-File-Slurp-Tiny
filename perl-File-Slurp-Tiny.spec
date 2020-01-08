@@ -4,14 +4,15 @@
 #
 Name     : perl-File-Slurp-Tiny
 Version  : 0.004
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/L/LE/LEONT/File-Slurp-Tiny-0.004.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/L/LE/LEONT/File-Slurp-Tiny-0.004.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-slurp-tiny-perl/libfile-slurp-tiny-perl_0.004-1.debian.tar.xz
-Summary  : A simple, sane and efficient file slurper
+Summary  : 'A simple, sane and efficient file slurper [DISCOURAGED]'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-File-Slurp-Tiny-license = %{version}-%{release}
+Requires: perl-File-Slurp-Tiny-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -37,18 +38,28 @@ Group: Default
 license components for the perl-File-Slurp-Tiny package.
 
 
+%package perl
+Summary: perl components for the perl-File-Slurp-Tiny package.
+Group: Default
+Requires: perl-File-Slurp-Tiny = %{version}-%{release}
+
+%description perl
+perl components for the perl-File-Slurp-Tiny package.
+
+
 %prep
 %setup -q -n File-Slurp-Tiny-0.004
-cd ..
-%setup -q -T -D -n File-Slurp-Tiny-0.004 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libfile-slurp-tiny-perl_0.004-1.debian.tar.xz
+cd %{_builddir}/File-Slurp-Tiny-0.004
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Slurp-Tiny-0.004/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/File-Slurp-Tiny-0.004/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -58,7 +69,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -67,8 +78,8 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny/deblicense_copyright
+cp %{_builddir}/File-Slurp-Tiny-0.004/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny/5b460a74fc176dd569fe582e58fe0be43ea65d6a
+cp %{_builddir}/File-Slurp-Tiny-0.004/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny/1b8356a83a7c509464a3f527c377e097f3017313
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -81,7 +92,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/File/Slurp/Tiny.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -89,5 +99,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-File-Slurp-Tiny/LICENSE
-/usr/share/package-licenses/perl-File-Slurp-Tiny/deblicense_copyright
+/usr/share/package-licenses/perl-File-Slurp-Tiny/1b8356a83a7c509464a3f527c377e097f3017313
+/usr/share/package-licenses/perl-File-Slurp-Tiny/5b460a74fc176dd569fe582e58fe0be43ea65d6a
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/File/Slurp/Tiny.pm
