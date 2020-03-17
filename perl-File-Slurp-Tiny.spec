@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Slurp-Tiny
 Version  : 0.004
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/L/LE/LEONT/File-Slurp-Tiny-0.004.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/L/LE/LEONT/File-Slurp-Tiny-0.004.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-slurp-tiny-perl/libfile-slurp-tiny-perl_0.004-1.debian.tar.xz
@@ -79,7 +79,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny
 cp %{_builddir}/File-Slurp-Tiny-0.004/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny/5b460a74fc176dd569fe582e58fe0be43ea65d6a
-cp %{_builddir}/File-Slurp-Tiny-0.004/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny/1b8356a83a7c509464a3f527c377e097f3017313
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-File-Slurp-Tiny/1b8356a83a7c509464a3f527c377e097f3017313
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -104,4 +104,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/File/Slurp/Tiny.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/Slurp/Tiny.pm
