@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Slurp-Tiny
 Version  : 0.004
-Release  : 14
+Release  : 15
 URL      : https://cpan.metacpan.org/authors/id/L/LE/LEONT/File-Slurp-Tiny-0.004.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/L/LE/LEONT/File-Slurp-Tiny-0.004.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-slurp-tiny-perl/libfile-slurp-tiny-perl_0.004-1.debian.tar.xz
@@ -104,4 +104,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/File/Slurp/Tiny.pm
+/usr/lib/perl5/vendor_perl/5.30.3/File/Slurp/Tiny.pm
